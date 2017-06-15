@@ -1,0 +1,136 @@
+<%= form_for(@station,:html => {:id => "form_station",  multipart: true})  do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box collPadd5">
+          <div class="formTitle left">
+            <h1>Details</h1>
+          </div>
+
+          <% if @station.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@station.errors.count, "error") %> prohibited this station from being saved:</h2>
+
+                <ul>
+                  <% @station.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <!-- First Row -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.text_field :name, class: "form-control", placeholder: "Station Name" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.text_field :address, class: "form-control", id: "searchTextField", placeholder: "Station Address" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.text_field :phone, class:"form-control",  placeholder: "Phone Number" %>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="fileUploader selected"> <!-- If the image is chosen add "selected" class  -->
+              <%= f.file_field :image, class: 'inputfile' %>
+              <%= f.label :image do %>
+                <i class="fa fa-upload" aria-hidden="true"></i><span>Choose a file</span>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- Second Row -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.text_area :description, cols:"30", rows:"10", class: "form-control", placeholder: "Station information" %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.text_area :beverage_store, cols:"30", rows:"10", class: "form-control", placeholder: "Beverage store information" %>
+            </div>
+          </div>
+
+          <span id="timtable_container">
+            <%
+            if @station.id
+              @timetables = JSON.parse(@station.timetable)
+            else
+              @timetables = []
+            end
+            counter = 0
+            %>
+
+            <% @timetables.each do |timetable| %>
+            <% counter = counter+1 %>
+              <!-- Third Row -->
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-role="name" placeholder="Train Name" value="<%= timetable[0] %>">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-role="departure" placeholder="Departure" value="<%= timetable[1] %>">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-role="arrival" placeholder="Arrival" value="<%= timetable[2] %>">
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group">
+                  <% if counter ==1 %>
+                    <button id="timetable_add" class="btn fullWidth btn-primary outline"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  <% else %>
+                    <button id="timetable_add" class="btn fullWidth btn-primary outline"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+            <% if counter ==0 %>
+               <div class="col-md-5">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-role="name" placeholder="Train Name">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-role="departure" placeholder="Departure">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" data-role="arrival" placeholder="Arrival">
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group">
+                    <button id="timetable_add" class="btn fullWidth btn-primary outline"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            <% end %>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <% if @station.id %>
+          <%= f.button 'Edit Station', class: "btn btn-primary right", id: 'save_btn', data: {disable_with: "Submitting..."} %>
+        <% else %>
+          <%= f.button 'Add Station', class: "btn btn-primary right", id: 'save_btn' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= f.text_area :timetable, class: 'hidden' %>
+<% end %>

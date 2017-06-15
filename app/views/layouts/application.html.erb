@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Train</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDCD3JODKwfTEB8U7OPu4UJJQN-m6UEl7o", 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!-- Start Header Section -->
+
+
+  <%= yield %>
+
+  <footer>
+    <p>Copyright © 2017 Train Stations Test Task</p>
+  </footer>
+</body>
+</html>

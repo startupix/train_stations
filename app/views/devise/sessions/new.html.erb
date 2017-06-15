@@ -1,0 +1,34 @@
+<body class="bgImg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-centered">
+        <div class="signForm">
+          <div class="formTitle">
+            <h1>Login</h1>
+          </div>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="form-group">
+              <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Username" %>
+            </div>
+            <div class="form-group">
+              <%= f.password_field :password, autocomplete: "off",class: "form-control", placeholder: "Password"   %>
+            </div>
+              <% if devise_mapping.rememberable? -%>
+                  <div class="form-group checkLine">
+                    <label>
+                      <%= f.check_box :remember_me %>
+                      <span class="checkIconArea"><i class="glyphicon glyphicon-ok"></i></span>
+                      <p class="checkTxt">Remember me</p>
+                    </label>
+                  </div>
+              <% end -%>
+            <div class="form-group mt20">
+              <%= f.button "Log in", class: "btn btn-primary btn-centered" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,35 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="nav-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="<%= root_path %>">Home</a></li>
+              <li><%= link_to('Stations', stations_path)  %></li>
+              <li><%= link_to('Add station', new_station_path)  %></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <% if admin_signed_in? %>
+                  <li><a href="#">Hi <%= current_admin.email %></a></li>
+                  <li>
+                    <%= link_to destroy_admin_session_path, method: :delete do %>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <% end %>
+              <% else%>
+                  <%= link_to('Login', new_admin_session_path)  %>
+              <% end %>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,101 @@
+<header class="pageHeader">
+  <div class="container">
+
+    <div class="pageNavigation clearAfter">
+
+      <!-- Site Logo -->
+      <div class="headerLogo">
+        <%= link_to 'logo', root_path %>
+      </div>
+
+      <!-- Site Top Navigation Bar -->
+      <div class="headerNav">
+        <ul class="clearAfter">
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Contact Us', root_path %></li>
+          <li><%= link_to 'About Us', root_path %></li>
+          <% if admin_signed_in? %>
+              <li><%= link_to('Admin', stations_path)  %></li>
+              <li><%= link_to('Logout', destroy_admin_session_path, method: :delete)  %></li>
+          <% else%>
+              <li><%= link_to('Login', new_admin_session_path)  %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<section class="fullInfo">
+  <p id="notice"><%= notice %></p>
+  <div class="fullImage" style="background-image: url('/assets/item-big.jpg')">
+    <h1><%= @station.name %></h1>
+  </div>
+
+  <div class="container">
+    <div class="mainInfo clearAfter">
+      <div class="contactInfo">
+        <div class="column">
+          <div class="article">
+            <h3 class="label">Station Address</h3>
+            <p class="info"><i class="fa fa-map-marker" aria-hidden="true"></i><%= @station.address %></p>
+          </div>
+
+          <div class="article mt15">
+            <h3 class="label">Phone Number</h3>
+            <p class="info"><i class="fa fa-phone" aria-hidden="true"></i><%= @station.phone %></p>
+          </div>
+
+          <div class="article mt15">
+            <h3 class="label">Station Information</h3>
+            <p class="info"><i class="fa fa-info" aria-hidden="true"></i><%= @station.description %></p>
+          </div>
+
+          <div class="article mt15">
+            <h3 class="label">Beverage store information</h3>
+            <p class="info"><i class="fa fa-info" aria-hidden="true"></i><%= @station.beverage_store %></p>
+          </div>
+
+        </div>
+
+        <div class="column">
+          <div id="map" data-address="<%= @station.address %>" class="mt10 mb10"></div>
+        </div>
+      </div>
+
+      <div class="article mt25">
+        <div class="tableStyle">
+          <div class="tableName">
+            <h2>Timetable</h2>
+          </div>
+          <table border="0">
+            <thead>
+            <tr>
+              <th><span>Train Name</span></th>
+              <th><span>Departure</span></th>
+              <th><span>Arrival</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @timetables = JSON.parse(@station.timetable) %>
+            <% @timetables.each do |timetable| %>
+              <tr>
+                <td><%= timetable[0] %></td>
+                <td>
+                  <span><%= timetable[1] %></span>
+                </td>
+                <td>
+                  <span><%= timetable[2] %></span>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>

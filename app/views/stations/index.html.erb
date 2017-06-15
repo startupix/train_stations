@@ -1,0 +1,121 @@
+<body>
+  <%= render 'shared/header' %>
+  <p id="notice"><%= notice %></p>
+  <!-- Start Breadcrumbs Block -->
+
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><%= link_to('Home', root_path) %></li>
+            <li class="active">Stations List</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Breadcrumbs Block -->
+
+  <!-- Start Content Section -->
+
+  <section class="content fromSection">
+    <form action="">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="blockTitle">
+              <h1>Stations List</h1>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <%= link_to('Add station', new_station_path, class: "btn btn-primary right" )  %>
+          </div>
+          <div class="col-md-12">
+            <div class="box">
+              <table class="table table-bordered table-hover table-striped stations">
+                <thead>
+                <tr>
+                  <th>Station name</th>
+                  <th>Station address</th>
+                  <th>Phone number</th>
+                  <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @stations.each do |station| %>
+                    <tr>
+                      <td><%= station.name %></td>
+                      <!--<td><%= station.description %></td>-->
+                      <td><%= station.address %></td>
+                      <td><%= station.phone %></td>
+                      <!--<td><%= station.beverage_store %></td>-->
+                      <!--<td><%= station.timetable %></td>-->
+                      <!--<td><%= link_to 'Show', station %></td>-->
+                      <td class="options">
+                        <ul class="clearAfter">
+                          <li class="edit"><%= link_to 'Edit', edit_station_path(station) %></li>
+                          <li class="delete"><%= link_to 'Destroy', station, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                        </ul>
+                      </td>
+                    </tr>
+                <% end %>
+    <!--            <tr>
+                  <td>Armenia, Yerevan</td>
+                  <td>+374 94 55 44 66</td>
+                  <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Beatae voluptas quidem non, <a href="" data-toggle="modal" data-target="#stationInfo">Show more</a>
+                  </td>
+
+                </tr>
+    -->            </tbody>
+              </table>
+              <!--<div class="tableMeta clearAfter">
+                <div class="metaInfo">
+                  <span>Showing X of N stations</span>
+                </div>
+                <ul class="pagination">
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Prev</span>
+                    </a>
+                  </li>
+                  <li class="active"><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- End Content Section -->
+
+  <div class="modal fade" id="stationInfo" tabindex="-1" role="dialog">
+    <form action="">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Station Information</h4>
+          </div>
+          <div class="modal-body">
+            <div class="box">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cum illo pariatur, perspiciatis nostrum optio sapiente aliquam provident obcaecati beatae itaque accusantium voluptas, omnis fuga tempore illum ipsa nihil fugiat!</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>

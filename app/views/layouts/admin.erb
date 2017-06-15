@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Train Admin</title>
+  <%= csrf_meta_tags %>
+  <meta name="description" content="">
+  <meta name="author" content="StartUpix" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <%= stylesheet_link_tag    'application_admin', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application_admin', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDCD3JODKwfTEB8U7OPu4UJJQN-m6UEl7o', 'data-turbolinks-track' => true %>
+</head>
+  <%= yield %>
+</html>

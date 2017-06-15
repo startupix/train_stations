@@ -1,0 +1,74 @@
+<header class="fullSection">
+  <div class="container">
+    <div class="pageNavigation clearAfter">
+
+      <!-- Site Logo -->
+      <div class="headerLogo">
+        <%= link_to 'logo', root_path %>
+      </div>
+
+      <!-- Site Top Navigation Bar -->
+      <div class="headerNav">
+        <ul class="clearAfter">
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Contact Us', root_path %></li>
+          <li><%= link_to 'About Us', root_path %></li>
+          <% if admin_signed_in? %>
+              <li><%= link_to('Admin', stations_path)  %></li>
+              <li><%= link_to('Logout', destroy_admin_session_path, method: :delete)  %></li>
+          <% else%>
+              <li><%= link_to('Login', new_admin_session_path)  %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption">
+    <h1><span>Find your closest</span> train station</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias officiis voluptas amet libero nobis aliquid deserunt nostrum excepturi minus. Impedit, veritatis nostrum quidem in. Iusto veritatis, inventore delectus necessitatibus eveniet.</p>
+  </div>
+</header>
+
+
+
+<section class="featredItems">
+  <p id="notice"><%= notice %></p>
+  <div class="blockTitle border">
+    <h1>Stations</h1>
+  </div>
+  <div class="container">
+    <div class="items clearAfter">
+      <% counter = 0 %>
+      <% @stations.each do |station| %>
+          <% counter += 1
+            if counter == 4
+              counter = 1
+            end
+          %>
+          <div class="item wow bounceInUp" data-wow-delay="0.<%= counter %>s">
+            <div class="itemPadd">
+              <div class="itemImg">
+                <% if !station.image.thumb.url.nil? %>
+                  <%= image_tag station.image.thumb.url, alt: "charging-station" %>
+                <%else%>
+                  <%= image_tag ('item.jpg') %>
+                <%end%>
+              </div>
+              <div class="itemInfo">
+                <h2><%= link_to station.name, station %></h2>
+                <p><%= station.phone %></p>
+              </div>
+              <div class="itemMeta">
+                <p><i class="fa fa-map-marker" aria-hidden="true"></i><%= station.address %></p>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+    <!--<div class="loadMore tac mb50">
+      <button class="btn btnBlue">Load More</button>
+    </div>-->
+  </div>
+</section>
